@@ -2,8 +2,8 @@ extends Node3D
 
 signal gameStart
 var gameStarted = false
-var SPEED = 10
-var speedCap = 20
+var SPEED = 5
+var speedCap = 10
 
 @onready var player = $Player
 @onready var level = $level
@@ -14,14 +14,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
 	# (mousePos.x/winDim.x) * .5, (mousePos.y/winDim.y) * .5
 	
-	SPEED = Vector2((player.mousePos.x/player.winDim.x), (player.mousePos.y/player.winDim.y))
-	SPEED = 5/SPEED.distance_to(Vector2(0, 0))
-	SPEED = min(SPEED, speedCap)
-	print(SPEED)
-	if(gameStarted):
-		level.position.z += SPEED * delta
+	# SPEED = Vector2((player.mousePos.x/player.winDim.x), (player.mousePos.y/player.winDim.y))
+	# SPEED = 1/SPEED.distance_to(Vector2(0, 0))
+	# SPEED = min(SPEED, speedCap)
+	# if(gameStarted):
+	# 	level.position.z += SPEED * delta
 	
 
 func _on_start_btn_pressed():
@@ -29,4 +29,8 @@ func _on_start_btn_pressed():
 	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	emit_signal("gameStart")
 	$Player/AnimationPlayer.play("driveSubInView")
-	$control/mainMenuUI/start_btn.hide()
+	$control/mainMenuUI.hide()
+
+
+func _on_exit_btn_pressed():
+	get_tree().quit()

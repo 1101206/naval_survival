@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs0bquy5rq4p3"]
+[gd_scene load_steps=7 format=3 uid="uid://cs0bquy5rq4p3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_83b1g"]
 [ext_resource type="PackedScene" uid="uid://b27vmwl6qaw7f" path="res://level.tscn" id="2_715nj"]
+[ext_resource type="Texture2D" uid="uid://envlcms7phfw" path="res://intro/subWait.png" id="2_dqtal"]
 [ext_resource type="PackedScene" uid="uid://dpnvcirf83p45" path="res://player/player.tscn" id="2_mbgj8"]
+[ext_resource type="Texture2D" uid="uid://b71fvxcwxhyhk" path="res://intro/subLeave.png" id="3_1q231"]
 
 [sub_resource type="Environment" id="Environment_3h3jw"]
 background_mode = 1
@@ -42,16 +44,44 @@ alignment = 1
 
 [node name="start_btn" type="Button" parent="control/mainMenuUI"]
 layout_mode = 2
-text = "Start
+text = "START
 "
 
+[node name="exit_btn" type="Button" parent="control/mainMenuUI"]
+layout_mode = 2
+text = "EXIT
+"
+
+[node name="TextureRect" type="TextureRect" parent="control"]
+visible = false
+layout_mode = 2
+offset_left = 90.5
+offset_top = 64.0
+offset_right = 1061.5
+offset_bottom = 654.0
+texture = ExtResource("2_dqtal")
+
+[node name="TextureRect2" type="TextureRect" parent="control"]
+visible = false
+show_behind_parent = true
+layout_mode = 2
+offset_left = 90.5
+offset_top = 64.0
+offset_right = 1061.5
+offset_bottom = 654.0
+texture = ExtResource("3_1q231")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="control"]
+
 [node name="level" parent="." instance=ExtResource("2_715nj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31)
 
 [node name="Player" parent="." instance=ExtResource("2_mbgj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.285479, 0.41049, 0, 0.82098, 0.570957, -0.5, -0.494463, 0.710989, 0, 5, 0)
+light_energy = 0.6
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3h3jw")
@@ -62,3 +92,4 @@ wait_time = 40.0
 [connection signal="gameStart" from="." to="Player" method="_on_node_3d_game_start"]
 [connection signal="pressed" from="control/mainMenuUI/start_btn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="control/mainMenuUI/start_btn" to="Player" method="_on_start_btn_pressed"]
+[connection signal="pressed" from="control/mainMenuUI/exit_btn" to="." method="_on_exit_btn_pressed"]

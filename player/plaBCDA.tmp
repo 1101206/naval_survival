@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpnvcirf83p45"]
+[gd_scene load_steps=9 format=3 uid="uid://dpnvcirf83p45"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_l1fin"]
 [ext_resource type="Texture2D" uid="uid://c4ocs3py2aui" path="res://player/Submarine Model_dirty_steel.png" id="2_uqbf4"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xub1m"]
-friction = 0.0
-bounce = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_q5afk"]
 
 [sub_resource type="Animation" id="Animation_fnvs3"]
 resource_name = "driveSubInView"
@@ -13,10 +11,10 @@ length = 0.5
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../mesh")
+tracks/0/path = NodePath("../mesh")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, -2, 10, 0.5, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -2, 10, 0.0001, 1, 0, 0, 0, 0.0002, 1, 0, -7, 19, 0.0003, 1, 0, -1.94388, 13.339, 0.0004, 1, 0, -0.9, 19, 0.0005, 1, 0, -2, 8, 0.0006, 1, 0, -1, 13, 0.5, 1, 0, 0, 0, 0.5001, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pctn5"]
 _data = {
@@ -62,18 +60,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dn668")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_q5afk"]
-
 [node name="Player" type="RigidBody3D" groups=["player"]]
-collision_mask = 32
-physics_material_override = SubResource("PhysicsMaterial_xub1m")
-max_contacts_reported = 1
-contact_monitor = true
+collision_mask = 41
 lock_rotation = true
 script = ExtResource("1_l1fin")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q5afk")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Area3D/CollisionShape3D")
+root_node = NodePath("../CollisionShape3D")
 libraries = {
 "": SubResource("AnimationLibrary_pctn5")
 }
@@ -82,7 +78,7 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="mesh"]
-transform = Transform3D(-0.25, 0, -3.7749e-08, 0, 0.25, 0, 3.7749e-08, 0, -0.25, 0, 0, 0)
+transform = Transform3D(-0.25, 0, -2.18557e-08, 0, 0.25, 0, 2.18557e-08, 0, -0.25, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wujh5")
 skeleton = NodePath("../..")
 
@@ -90,34 +86,3 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
 doppler_tracking = 2
 fov = 70.0
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-offset_right = 67.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-layout_mode = 2
-
-[node name="speedLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "SPEED:"
-
-[node name="speed" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "0
-"
-
-[node name="Area3D" type="Area3D" parent="."]
-collision_mask = 62
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_q5afk")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
