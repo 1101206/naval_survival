@@ -1,5 +1,5 @@
 ﻿# Naval Survival
-###alpha v0.1
+### alpha v0.1
 
 an infinite runner game where you drive a submarine through terrain, avoiding naval mines, rocky terrain, torpedos and ships, all while staying hidden from ships above that will drop explosives into the water when you are near the surface.
 
