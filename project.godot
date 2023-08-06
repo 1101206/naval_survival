@@ -11,12 +11,26 @@ config_version=5
 [application]
 
 config/name="Naval Survival"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Naval Survival"
+
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Terrain"
+3d_physics/layer_3="Mines"
+3d_physics/layer_4="Ships"
+3d_physics/layer_5="Torpedos"
+3d_physics/layer_6="ocean_surface_floor"
+
+[physics]
+
+3d/default_gravity_vector=Vector3(0, 0, 0)
 
 [rendering]
 

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpnvcirf83p45"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_l1fin"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q5afk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_swm1a"]
+
+[sub_resource type="Animation" id="Animation_fnvs3"]
+resource_name = "driveSubInView"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -5, 16, 0.0001, 1, 0, -3, 14, 0.0002, 1, 0, -8, 16, 0.5, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pctn5"]
+_data = {
+"driveSubInView": SubResource("Animation_fnvs3")
+}
+
+[node name="Player" type="RigidBody3D"]
+script = ExtResource("1_l1fin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q5afk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -8, 16)
+mesh = SubResource("CapsuleMesh_swm1a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
+fov = 30.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionShape3D")
+libraries = {
+"": SubResource("AnimationLibrary_pctn5")
+}

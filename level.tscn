@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://b27vmwl6qaw7f"]
+
+[ext_resource type="Texture2D" uid="uid://byv3waqm8hqrh" path="res://environment_textures/seamlessStone.jpg" id="1_8w4ow"]
+[ext_resource type="Texture2D" uid="uid://b0225e0bup61g" path="res://environment_textures/looping_water.jpg" id="2_72rry"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8rrf"]
+albedo_color = Color(0.356863, 0.345098, 0.384314, 1)
+albedo_texture = ExtResource("1_8w4ow")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0ulf"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.282353)
+albedo_texture = ExtResource("2_72rry")
+
+[node name="level" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42)
+
+[node name="terrain1" type="Node3D" parent="."]
+
+[node name="seaFloor" type="CSGBox3D" parent="terrain1"]
+use_collision = true
+collision_layer = 32
+collision_mask = 0
+size = Vector3(80, 0.01, 100)
+material = SubResource("StandardMaterial3D_h8rrf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="terrain1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+use_collision = true
+collision_layer = 32
+size = Vector3(80, 0.001, 100)
+material = SubResource("StandardMaterial3D_i0ulf")
+
+[node name="terrain2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+
+[node name="seaFloor" type="CSGBox3D" parent="terrain2"]
+use_collision = true
+collision_layer = 32
+collision_mask = 0
+size = Vector3(80, 0.01, 100)
+material = SubResource("StandardMaterial3D_h8rrf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="terrain2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+use_collision = true
+collision_layer = 32
+size = Vector3(80, 0.001, 100)
+material = SubResource("StandardMaterial3D_i0ulf")
+
+[node name="terrain3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
+
+[node name="seaFloor" type="CSGBox3D" parent="terrain3"]
+use_collision = true
+collision_layer = 32
+collision_mask = 0
+size = Vector3(80, 0.01, 100)
+material = SubResource("StandardMaterial3D_h8rrf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="terrain3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+use_collision = true
+collision_layer = 32
+size = Vector3(80, 0.001, 100)
+material = SubResource("StandardMaterial3D_i0ulf")
